@@ -7,7 +7,7 @@ public class blocks {
 	private int x,y,num;
 	private Vector<block> bs;
 	private Random rm = new Random();
-	//¹¹Ôìº¯Êı£¬ÓĞÉèÖÃºÍÎŞÉèÖÃ£¬ÎŞÉèÖÃÊ¹ÓÃÄ¬ÈÏ²ÎÊı9¡¢9¡¢16
+	//create by the parameterts, or the default.
 	public blocks(int[] setting) {
 		set(setting);
 	}
@@ -15,20 +15,20 @@ public class blocks {
 		int[] setting= {9,9,10};
 		set(setting);
 	}
-	//·µ»ØµÚi¸öbomb
+	//get No.i bomb
 	public block getBomb(int i) {
 		if(i<bs.size()&&0<=i)
 		return bs.get(i);
 		
 		return null;
 	}
-	//ÖØÖÃÈ«²¿bomb
+	//reset all bomb
 	public void reset() {
 		for(block i:bs) {
 			i.reset();
 		}
 	}
-	//¸ù¾İÉèÖÃµ÷Õûbombs£¬ÔÚ¹¹Ôì·½·¨ÖĞµ÷ÓÃ¡£
+	//set bomb by the setting
 	public void set(int[] setting) {
 		bs=new Vector<block>();
 		x=setting[0];
@@ -39,7 +39,7 @@ public class blocks {
 		setBomb(size,num);
 		setAroundNum();
 	}
-	//ÉèÖÃ¸ñ×Ó£¬À×£¬²¢¸³ÖµÖÜÎ§À×Êı
+	//set the other properties
 	private void setBlock(int size) {
 		for (int i=0;i<size;i++) {
 			bs.add(new block());
@@ -68,7 +68,7 @@ public class blocks {
 			b.setAround(count);
 		}
 	}
-	//´¥·¢µÚi¸ö¸ñ×ÓÊ±½øĞĞµÄ²Ù×÷,-1´¥À×£¬-2´¥Æì×Ó£¬1ÎªÕı³£´¥ÅöÊı×Ö¡£
+	//touch the No.i block with return -1(bomb) -2(flag) 1(default)
 	public int blockShow(int site) {
 		block b=bs.get(site);
 		if(b.isBomb()) return -1;
@@ -77,7 +77,7 @@ public class blocks {
 		else b.setShow();
 		return 1;
 	}
-	//ÄÚ²¿ÓÃÕ¹¿ªº¯Êı£¬Ê¹ÓÃµİ¹é¸¨ÖúblockShow£¬¹ã¶ÈËÑË÷ÖÜÎ§¸ñ×Ó¡£
+	//open the blocks by BFS
 	private int spread(int site) {
 		block b=bs.get(site);
 		if(b.isShow()) return 0;
@@ -89,7 +89,7 @@ public class blocks {
 			}
 		return 1;
 	}
-	//ÖØÉèÎ»ÖÃ£¬dir±íÊ¾×óÉÏµ½ÓÒÏÂ°Ë¸ö·½Ïò£¬Ö÷ÒªÓÃÓÚ¼ì²éÊÇ·ñÊı×éÔ½½çºÍ´¥Åö±ß½ç¡£
+	//reset the site,the dir 1-8 show the direction
 	private int resite(int site,int dir) {
 		switch(dir){
 			case 1:if (site/x!=0&&site%x!=0) return site-x-1;break;
@@ -104,7 +104,7 @@ public class blocks {
 		}
 		return -100;
 	}
-	//Ê¤Àû¼ì²â
+	//win or not
 	public boolean winCheck() {
 		int blockLeft=0;
 		for(int i=0;i<x*y;i++) {
@@ -117,7 +117,7 @@ public class blocks {
 		}
 		return false;
 	}
-	//µ÷ÊÔÓÃ
+	//show in the console to demo
 	public void show() {
 		for(int i=0;i<x*y;i++) {
 			System.out.printf("%3d",bs.get(i).getAround());
@@ -133,7 +133,7 @@ public class blocks {
 		System.out.print("\n");
 		for(int i=0;i<x*y;i++) {
 			if(bs.get(i).isShow())
-			System.out.printf("¿Ú");
+			System.out.printf("å£");
 			else System.out.printf("0");	
 			if(i%x+1==x) System.out.print("\n");
 		}
