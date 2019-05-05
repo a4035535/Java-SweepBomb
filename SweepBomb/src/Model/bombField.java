@@ -1,19 +1,18 @@
 package Model;
 
 public class bombField extends blocks{
-	//基本参数，长度、高度、雷数。
+	//parameters about game.
 	private int flagNum;
 	private int[] setting= {9,9,10};
-	//设置边界值，长宽限制、雷数限制。
+	//defaut setting and the boundary value
 	private final int MAX_L=30,MAX_NUM=99,MIN_L=9,MIN_NUM=10;
-	//默认设置，初中高级
 	private static int[][] defaultSetting= {{9,9,10},{16,16,40},{30,16,99}};
-	//格子区对象预创建。	
+	//set the blocks	
 	bombField(){
 		super(defaultSetting[0]);
 		setLevel(0);
 	}
-	//根据0、1、2调整默认难度设置
+	//set level by 0 1 2
 	public int setLevel(int i) { 
 		if(i==1||i==0||i==2) {
 			setting=defaultSetting[i];
@@ -21,7 +20,7 @@ public class bombField extends blocks{
 		}
 		return 0;
 	}
-	//根据给定参数自定难度设置。
+	//set level by user
 	public int setLevel(int a,int b,int c) {
 		if(MIN_L<a) setting[0]=MIN_L;
 		else if (a>MAX_L) setting[0]=MAX_L;
@@ -39,20 +38,20 @@ public class bombField extends blocks{
 		
 		return 1;
 	}
-	//取得设定值，返回int数组
+	//get the setting
 	public int[] getSetting() {
 		return setting;
 	}
-	//返回当前雷区大小
+	//get the field size
 	public int getSize() {
 		return setting[0]*setting[1];
 	}
-	//重构区域，成功返回1；
+	//reset the field
 	public int reStart() {
 		set(setting);
 		return 1;
 	}
-	//取得旗子数目
+	//get flag num
 	public int getFlagNum() {
 		int count=0;
 		for(int i=0;i<this.getSize();i++) {
@@ -61,7 +60,7 @@ public class bombField extends blocks{
 		}
 		return count;
 	}
-	//依据传入的字符串数组调整设置
+	//change the setting
 	public void setSetting(int[] str) {
 		setting = str;
 	}
