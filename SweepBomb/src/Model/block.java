@@ -1,13 +1,12 @@
 package Model;
 
 public class block {
-	//基本参数，是否有雷，周围雷数，是否插旗。
+	//basic parameter about the block
 	private boolean isBomb=false;
 	private int aroundBombNum=0;
 	private boolean isFlag=false;
 	private boolean isShow=false;
-	//int值为1表示操作成功。
-	//各个属性的set get
+	//set get
 	public int reset() {
 		isBomb=false;
 		aroundBombNum=0;
